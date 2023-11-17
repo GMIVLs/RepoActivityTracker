@@ -7,12 +7,13 @@
 
 ## ChangeLog
 
+- `2023-11-17: 21:00`: Adjust the meeage from the server.
 - `2023-11-16: 23:00`: ngrok server delpoyed, and works flawlessly.
 
 ## TODO
 
-- [ ] Automate this to any github repo.
-  - [ ] Parsing more fields form data.json
+- [x] Automate this to any github repo.
+  - [x] Parsing more fields form data.json
   - [x] Listen to more events
 - [x] Adding Makefile to run the commands.
 

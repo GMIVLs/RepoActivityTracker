@@ -5,7 +5,6 @@ import subprocess
 
 PORT = int(os.getenv('PORT'))
 
-
 app = Flask(__name__)
 
 
@@ -19,8 +18,9 @@ def webhook():
 
         # Run E2sendingMessageClientElement.py script
         try:
-            subprocess.run(["python", "./src/E2sendingMessageClientElement.py"],
-                           check=True)
+            subprocess.run(
+                ["python", "./src/E2sendingMessageClientElement.py"],
+                check=True)
             print("E2sendingMessageClientElement.py executed successfully.")
         except subprocess.CalledProcessError as e:
             print(
@@ -39,6 +39,11 @@ def webhook():
         # Render the data in a simple HTML template when accessed via GET
         return render_template_string("""
             <html>
+                <script>
+                    setTimeout(function(){
+                    window.location.reload(1);
+                 }, 5000);  // Refresh every 5 seconds
+                </script>
                 <body>
                     <h1>Received JSON Data:</h1>
                     <pre>{{ data }}</pre>

@@ -39,6 +39,10 @@ async def main():
 
             # Extract the 'commits' list
             commits_data = received_data.get('commits')
+            ref = received_data.get('ref')
+            repository_full_name = received_data.get('repository',
+                                                     {}).get('full_name')
+
             if commits_data and isinstance(commits_data, list):
                 # Process only the first commit in the list
                 first_commit = commits_data[0] if len(
@@ -49,8 +53,9 @@ async def main():
                         'username', 'Unknown User')
                     message = first_commit.get('message', 'No message')
                     timestamp = first_commit.get('timestamp', 'No timestamp')
-                    # Format the message
-                    formatted_message = f"[🎉][{timestamp}] [{username}]:\n{message}"
+
+                    # Format the message with ref and full_name
+                    formatted_message = f"[\U0001F389] at [{timestamp}],\nAuthor: [{username}]\nin Repo: [{repository_full_name}]\non Branch: [{ref}]:\n\U00002728 Message: {message}"
 
                     # Send the message content
                     await send_message_to_room(room_id, formatted_message)
